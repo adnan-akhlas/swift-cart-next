@@ -12,6 +12,7 @@ export default function MainLayout({ children }: IProps) {
       <Navbar />
       <main className="grow">{children}</main>
       <Footer />
+      <div id="modal"></div>
     </section>
   );
 }
