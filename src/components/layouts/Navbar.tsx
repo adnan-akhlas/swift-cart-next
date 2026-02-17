@@ -1,11 +1,11 @@
 "use client";
 
+import { INavLink } from "@/app/types/navlinks";
+import MobileNav from "@/components/layouts/MobileNav";
+import NavLink from "@/components/layouts/NavLink";
+import { navlinks } from "@/constants/navlinks";
 import { IconShoppingCart } from "@tabler/icons-react";
 import Link from "next/link";
-import MobileNav from "@/components/MobileNav";
-import { navlinks } from "@/constants/navlinks";
-import { INavLink } from "@/app/types/navlinks";
-import NavLink from "@/components/NavLink";
 
 export default function Navbar() {
   const cartCount = 1;
@@ -17,12 +17,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <a href="./">
+            <div className="shrink-0">
+              <Link href="/">
                 <h1 className="text-xl font-semibold text-indigo-600">
                   SwiftCart
                 </h1>
-              </a>
+              </Link>
             </div>
 
             {/* Nav Links (Desktop) */}

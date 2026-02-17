@@ -1,7 +1,7 @@
 import { INavLink } from "@/app/types/navlinks";
 import { navlinks } from "@/constants/navlinks";
 import Link from "next/link";
-import NavLink from "@/components/NavLink";
+import NavLink from "@/components/layouts/NavLink";
 
 export default function Footer() {
   return (

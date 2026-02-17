@@ -1,7 +1,11 @@
+import Banner from "@/components/Banner";
+import Features from "@/components/Features";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Hello world</h1>
-    </div>
+    <>
+      <Banner />
+      <Features />
+    </>
   );
 }
