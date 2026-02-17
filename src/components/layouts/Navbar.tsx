@@ -26,7 +26,7 @@ export default function Navbar() {
             </div>
 
             {/* Nav Links (Desktop) */}
-            <div className="hidden md:flex font-semibold gap-8">
+            <div className="hidden md:flex font-semibold gap-8 text-gray-700">
               {navlinks.map((link: INavLink) => (
                 <NavLink key={link.label} href={link.href}>
                   {link.label}

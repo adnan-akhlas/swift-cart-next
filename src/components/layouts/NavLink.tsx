@@ -12,9 +12,7 @@ interface NavLinkProps {
 export default function NavLink({ href, closeMenu, children }: NavLinkProps) {
   const pathname = usePathname();
   const status =
-    pathname === href
-      ? "text-indigo-400"
-      : "text-gray-700 hover:text-indigo-400";
+    pathname === href ? "text-indigo-400" : "hover:text-indigo-400";
   return (
     <Link
       onClick={closeMenu}

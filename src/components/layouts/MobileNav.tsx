@@ -2,7 +2,6 @@
 import { INavLink } from "@/app/types/navlinks";
 import { navlinks } from "@/constants/navlinks";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import Link from "next/link";
 import { useState } from "react";
 import NavLink from "./NavLink";
 
@@ -48,7 +47,7 @@ export default function MobileNav() {
         </div>
 
         {/* Links */}
-        <nav className="p-6 space-y-4">
+        <nav className="p-6 space-y-4 text-gray-700">
           {navlinks.map((link: INavLink) => (
             <NavLink key={link.label} closeMenu={closeMenu} href={link.href}>
               {link.label}

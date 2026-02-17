@@ -7,7 +7,6 @@ export default function Banner() {
           src="/assets/banner-image.png" // Ensure this path matches your public folder or import
           alt="Banner Image"
           className="w-full h-full object-cover"
-          placeholder="blur"
         />
         {/* Dark Gradient Overlay */}
         <div
