@@ -1,71 +1,92 @@
 import { IProduct } from "@/app/types/product";
 import {
+  IconBookmark as BrandIcon,
   IconShoppingCartPlus as CartIcon,
-  IconStar as StarIcon,
-  IconEye as ViewIcon,
 } from "@tabler/icons-react";
 
+// Using a partial/specific interface based on your previous data
+interface ProductCardProps {
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  tags: string[];
+  thumbnail: string;
+  brand: string;
+}
+
 export default function ProductCard({ product }: { product: IProduct }) {
-  const { image, category, rating, title, price } = product;
+  const {
+    title,
+    description,
+    price,
+    discountPercentage,
+    tags,
+    thumbnail,
+    brand,
+  } = product;
+  // Logic for discount calculation
+  const discountPrice = price * (1 - discountPercentage / 100);
 
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col h-full group">
-      {/* Product Image */}
-      <div className="bg-gray-50 rounded-xl p-8 flex items-center justify-center relative overflow-hidden h-64">
+    <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+      {/* Image Header */}
+      <div className="relative aspect-square overflow-hidden bg-gray-50 p-6">
         <img
-          src={image}
+          src={thumbnail}
           alt={title}
-          className="h-full object-contain group-hover:scale-110 transition-transform duration-500 ease-in-out"
+          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
         />
+        {/* Discount Badge */}
+        <div className="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-sm">
+          -{discountPercentage}%
+        </div>
       </div>
 
-      {/* Info Body */}
-      <div className="flex flex-col grow mt-5">
-        <div className="flex items-center justify-between mb-3">
-          <span className="bg-indigo-50 text-indigo-600 text-[11px] uppercase tracking-widest font-bold px-2.5 py-1 rounded-lg">
-            {category}
+      {/* Content Body */}
+      <div className="p-5 flex flex-col flex-grow">
+        {/* Brand & Tags */}
+        <div className="flex items-center gap-2 mb-2">
+          <span className="flex items-center gap-1 text-[10px] font-bold text-indigo-600 uppercase tracking-tight bg-indigo-50 px-2 py-0.5 rounded">
+            <BrandIcon size={12} stroke={3} />
+            {brand}
           </span>
-
-          <div className="flex items-center text-sm font-medium text-gray-700 bg-gray-50 px-2 py-1 rounded-md">
-            {/* Using Aliased Tabler Star Icon */}
-            <StarIcon
-              size={16}
-              className="text-amber-400 fill-amber-400 mr-1"
-            />
-            <span>{rating?.rate}</span>
+          <span className="text-gray-300">|</span>
+          <div className="flex gap-1 overflow-hidden">
+            {tags?.map((tag) => (
+              <span key={tag} className="text-[10px] text-gray-500 font-medium">
+                #{tag}
+              </span>
+            ))}
           </div>
         </div>
 
-        <h3 className="font-bold text-gray-800 line-clamp-2 text-left h-12 leading-tight group-hover:text-indigo-600 transition-colors">
+        {/* Title & Description */}
+        <h3 className="text-gray-800 font-bold text-lg line-clamp-1 group-hover:text-indigo-600 transition-colors">
           {title}
         </h3>
+        <p className="text-gray-500 text-sm line-clamp-2 mt-1 leading-relaxed">
+          {description}
+        </p>
 
-        <div className="mt-auto pt-4">
-          <div className="flex items-baseline gap-1 mb-4">
-            <span className="text-sm font-semibold text-gray-400">$</span>
+        {/* Price Section */}
+        <div className="mt-auto pt-5 flex items-end justify-between">
+          <div className="flex flex-col">
+            <span className="text-gray-400 text-sm line-through leading-none mb-1">
+              ${price?.toFixed(2)}
+            </span>
             <span className="text-2xl font-black text-gray-900 leading-none">
-              {price?.toFixed(2)}
+              ${discountPrice?.toFixed(2)}
             </span>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex gap-2">
-            <button
-              type="button"
-              className="flex-1 border-2 border-gray-100 rounded-xl py-2 text-gray-600 hover:bg-gray-50 hover:border-gray-200 transition-all flex items-center justify-center gap-2 text-sm font-bold active:scale-95"
-            >
-              <ViewIcon size={18} stroke={2} />
-              Details
-            </button>
-
-            <button
-              type="button"
-              className="flex-[1.5] bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl py-2 transition-all flex items-center justify-center gap-2 text-sm font-bold shadow-indigo-100 shadow-lg active:scale-95"
-            >
-              <CartIcon size={18} stroke={2} />
-              Add
-            </button>
-          </div>
+          <button
+            type="button"
+            className="bg-gray-900 hover:bg-indigo-600 text-white p-3 rounded-xl transition-all duration-300 active:scale-90 shadow-md"
+            aria-label="Add to cart"
+          >
+            <CartIcon size={20} stroke={2} />
+          </button>
         </div>
       </div>
     </div>
