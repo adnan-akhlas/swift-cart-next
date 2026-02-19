@@ -1,7 +1,13 @@
 "use server";
 
-export async function getProducts() {
-  const response = await fetch("https://dummyjson.com/products?limit=10");
+export async function getProducts(q: string) {
+  let uri: string;
+  if (q) {
+    uri = `https://dummyjson.com/products/search?q=${q}`;
+  } else {
+    uri = "https://dummyjson.com/products?limit=10";
+  }
+  const response = await fetch(uri);
   return response.json();
 }
 

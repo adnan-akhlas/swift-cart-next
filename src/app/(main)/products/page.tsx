@@ -4,8 +4,13 @@ import ProductCard from "@/components/ProductCard";
 import SearchForm from "@/components/SearchForm";
 // import { products } from "@/constants/products";
 
-export default async function Products() {
-  const { products } = await getProducts();
+interface ProductsProps {
+  searchParams: Promise<{ q: string }>;
+}
+
+export default async function Products({ searchParams }: ProductsProps) {
+  const { q } = await searchParams;
+  const { products } = await getProducts(q);
   return (
     <section>
       <h1 className="text-center text-4xl my-8">Products Page</h1>

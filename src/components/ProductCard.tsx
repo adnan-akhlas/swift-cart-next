@@ -4,6 +4,7 @@ import {
   IconShoppingCartPlus as CartIcon,
   IconEye as ViewIcon,
 } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductCard({ product }: { product: IProduct }) {
@@ -24,9 +25,10 @@ export default function ProductCard({ product }: { product: IProduct }) {
     <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
       {/* Image Header */}
       <div className="relative aspect-square overflow-hidden bg-gray-50 p-6">
-        <img
+        <Image
           src={thumbnail}
           alt={title}
+          fill
           className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-sm">
