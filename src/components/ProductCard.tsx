@@ -2,18 +2,8 @@ import { IProduct } from "@/app/types/product";
 import {
   IconBookmark as BrandIcon,
   IconShoppingCartPlus as CartIcon,
+  IconEye as ViewIcon,
 } from "@tabler/icons-react";
-
-// Using a partial/specific interface based on your previous data
-interface ProductCardProps {
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  tags: string[];
-  thumbnail: string;
-  brand: string;
-}
 
 export default function ProductCard({ product }: { product: IProduct }) {
   const {
@@ -25,7 +15,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
     thumbnail,
     brand,
   } = product;
-  // Logic for discount calculation
+
   const discountPrice = price * (1 - discountPercentage / 100);
 
   return (
@@ -37,7 +27,6 @@ export default function ProductCard({ product }: { product: IProduct }) {
           alt={title}
           className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
         />
-        {/* Discount Badge */}
         <div className="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-sm">
           -{discountPercentage}%
         </div>
@@ -53,7 +42,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
           </span>
           <span className="text-gray-300">|</span>
           <div className="flex gap-1 overflow-hidden">
-            {tags?.map((tag) => (
+            {tags?.slice(0, 2).map((tag) => (
               <span key={tag} className="text-[10px] text-gray-500 font-medium">
                 #{tag}
               </span>
@@ -61,7 +50,6 @@ export default function ProductCard({ product }: { product: IProduct }) {
           </div>
         </div>
 
-        {/* Title & Description */}
         <h3 className="text-gray-800 font-bold text-lg line-clamp-1 group-hover:text-indigo-600 transition-colors">
           {title}
         </h3>
@@ -69,24 +57,37 @@ export default function ProductCard({ product }: { product: IProduct }) {
           {description}
         </p>
 
-        {/* Price Section */}
-        <div className="mt-auto pt-5 flex items-end justify-between">
-          <div className="flex flex-col">
-            <span className="text-gray-400 text-sm line-through leading-none mb-1">
-              ${price?.toFixed(2)}
-            </span>
-            <span className="text-2xl font-black text-gray-900 leading-none">
-              ${discountPrice?.toFixed(2)}
-            </span>
+        {/* Price & Actions Section */}
+        <div className="mt-auto pt-5">
+          <div className="flex items-end justify-between mb-4">
+            <div className="flex flex-col">
+              <span className="text-gray-400 text-sm line-through leading-none mb-1">
+                ${price?.toFixed(2)}
+              </span>
+              <span className="text-2xl font-black text-gray-900 leading-none">
+                ${discountPrice?.toFixed(2)}
+              </span>
+            </div>
           </div>
 
-          <button
-            type="button"
-            className="bg-gray-900 hover:bg-indigo-600 text-white p-3 rounded-xl transition-all duration-300 active:scale-90 shadow-md"
-            aria-label="Add to cart"
-          >
-            <CartIcon size={20} stroke={2} />
-          </button>
+          {/* Equal Action Buttons */}
+          <div className="flex gap-2 w-full">
+            <button
+              type="button"
+              className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold py-3 px-2 rounded-xl transition-all duration-300 active:scale-95 border border-gray-200 shadow-sm"
+            >
+              <ViewIcon size={18} stroke={2} />
+              <span className="text-xs sm:text-sm">Details</span>
+            </button>
+
+            <button
+              type="button"
+              className="flex-1 flex items-center justify-center gap-2 bg-gray-900 hover:bg-indigo-600 text-white font-bold py-3 px-2 rounded-xl transition-all duration-300 active:scale-95 shadow-md"
+            >
+              <CartIcon size={18} stroke={2} />
+              <span className="text-xs sm:text-sm">Add</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

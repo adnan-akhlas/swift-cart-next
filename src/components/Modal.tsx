@@ -1,5 +1,5 @@
 "use client";
-import React, { DialogHTMLAttributes, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { IconX as CloseIcon } from "@tabler/icons-react";
 
