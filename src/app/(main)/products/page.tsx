@@ -1,9 +1,11 @@
+import { getProducts } from "@/actions/products";
 import { IProduct } from "@/app/types/product";
 import ProductCard from "@/components/ProductCard";
 import SearchForm from "@/components/SearchForm";
-import { products } from "@/constants/products";
+// import { products } from "@/constants/products";
 
-export default function Products() {
+export default async function Products() {
+  const { products } = await getProducts();
   return (
     <section>
       <h1 className="text-center text-4xl my-8">Products Page</h1>

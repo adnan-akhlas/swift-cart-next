@@ -4,9 +4,11 @@ import {
   IconShoppingCartPlus as CartIcon,
   IconEye as ViewIcon,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function ProductCard({ product }: { product: IProduct }) {
   const {
+    id,
     title,
     description,
     price,
@@ -72,13 +74,13 @@ export default function ProductCard({ product }: { product: IProduct }) {
 
           {/* Equal Action Buttons */}
           <div className="flex gap-2 w-full">
-            <button
-              type="button"
+            <Link
               className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold py-3 px-2 rounded-xl transition-all duration-300 active:scale-95 border border-gray-200 shadow-sm"
+              href={`/products/${id}`}
             >
               <ViewIcon size={18} stroke={2} />
               <span className="text-xs sm:text-sm">Details</span>
-            </button>
+            </Link>
 
             <button
               type="button"
